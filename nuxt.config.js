@@ -1,6 +1,8 @@
 
+const webpack = require("webpack");
+
 export default {
-  mode: 'spa',
+  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -23,11 +25,14 @@ export default {
   ** Global CSS
   */
   css: [
+    "@/assets/css/main.scss"
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/eventBus.js',
+    { src: "~/plugins/chart.js", ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -38,6 +43,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    "nuxt-svg-loader"
   ],
   /*
   ** Build configuration
@@ -47,6 +53,12 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
-    }
+    },
+
+    plugins: [
+      new webpack.ProvidePlugin({
+        '_': 'lodash'
+      })
+    ]
   }
 }
