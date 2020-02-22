@@ -13,6 +13,10 @@ const actions = {
 
     ADD_TO_HISTORY({ commit, getters }, {label, randomNumber}) {
         commit('ADD_TO_HISTORY', { label, randomNumber, getters })
+    },
+
+    ITERATIONS_INC({ commit, getters }) {
+        commit('SET_STATE', { prop: 'numOfIterations', value: getters.getState("numOfIterations") + 1 })
     }
 }
 

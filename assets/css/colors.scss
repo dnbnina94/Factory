@@ -1,0 +1,31 @@
+$darkBlue: #4095BF;
+$lightBlue: #D9EAF2;
+$lightGrey: #F5FAFA;
+
+.bg {
+    &-dark-blue {
+        background-color: $darkBlue;
+    }
+
+    &-light-blue {
+        background-color: $lightBlue;
+    }
+
+    &-light-grey {
+        background-color: $lightGrey;
+    }
+}
+
+.color {
+    &-dark-blue {
+        color: $darkBlue;
+    }
+
+    &-light-blue {
+        color: $lightBlue;
+    }
+
+    &-light-grey {
+        color: $lightGrey;
+    }
+}

@@ -1,1 +1,7 @@
 @import '~bootstrap/scss/bootstrap.scss';
+@import '~/assets/css/colors.scss';
+@import '~/assets/css/utilities.scss';
+
+body {
+    background-color: $lightBlue;
+}

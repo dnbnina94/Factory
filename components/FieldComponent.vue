@@ -1,16 +1,18 @@
 <template>
     <div class="field-component">
-        {{ field.label }}:
+        <span class="field-label">
+            <b>{{ field.label }}:</b>
+        </span>
         <br/>
         <div class="d-flex w-100">
-            <input type="text" class="form-control" v-model="randomNumber" />
-            <div class="arrow-container d-flex align-items-center justify-content-center">
+            <input type="text" class="form-control" disabled v-model="randomNumber" />
+            <div class="arrow-container d-flex align-items-center ml-2">
                 <arrow class="arrow" 
                        :class="{'arrow-up' : randomNumber > 0, 'arrow-down' : randomNumber < 0}" />
             </div>
         </div>
         <button class="btn w-100 mt-2"
-                :class="{'btn-success' : field.changeValue, 'btn-danger' : !field.changeValue}"
+                :class="{'btn-primary' : field.changeValue, 'btn-danger' : !field.changeValue}"
                 @click="toggleButton">
             {{ field.changeValue ? 'Enabled' : 'Disabled' }}
         </button>
@@ -57,6 +59,11 @@ export default {
                     label: this.field.label,
                     randomNumber: this.randomNumber
                 })
+            } else {
+                this.$store.dispatch("app/ADD_TO_HISTORY", {
+                    label: this.field.label,
+                    randomNumber: _.last(this.field.valueHistory)
+                })
             }
         },
 
@@ -72,16 +79,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/css/colors';
 
 .field-component {
 
-    .arrow-container {
-        width: 3rem;
-    }
-
     .arrow {
         width: 1rem;
-        fill: black;
+        fill: $darkBlue;
         transition: 0.4s ease-in-out;
 
         &-up {

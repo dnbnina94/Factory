@@ -1,16 +1,17 @@
 <template>
-  <div class="container">
+  <div class="page--home container">
     <div class="row">
-      <field-component v-for="(field, index) in fields"
+      <div class="col-md-7 mx-auto">
+        <div class="row">
+          <field-component v-for="(field, index) in fields"
                        :key="index"
                        :field="field"
-                       class="col-md-2">
-      </field-component>
+                       class="col-md-4"
+                       :class="{'mt-md-2' : index > 2}">
+          </field-component>
+        </div>  
+      </div>
     </div>
-
-    <nuxt-link to="/statistics">
-      Go to statistics
-    </nuxt-link>
   </div>
 </template>
 
@@ -20,12 +21,15 @@ import FieldComponent from "@/components/FieldComponent"
 
 export default {
 
+  name: "page--home",
+
   data: () => ({
-    generateIntervalId: null
+    generateIntervalId: null,
   }),
 
   created() {
     this.generateIntervalId = setInterval(() => {
+      this.$store.dispatch("app/ITERATIONS_INC")
       this.$bus.$emit('generateRandomValue')
     }, 2000)
   },
@@ -43,7 +47,7 @@ export default {
   computed: {
     fields() {
       return this.$store.getters["app/getState"]("fields")
-    }
+    },
   },
 
   components: {
@@ -53,5 +57,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.page--home {
+  
+}
 </style>

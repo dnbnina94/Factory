@@ -5,8 +5,7 @@ export const actions = {
 
         let fields = []
 
-        for (let i = 0; i < state.app.numOfFields; i++) {
-
+        _.times(state.app.numOfFields, i => {
             let newField = {}
 
             newField.label = String.fromCharCode('A'.charCodeAt() + i)
@@ -14,11 +13,11 @@ export const actions = {
             newField.changeValue = true
 
             fields.push(newField)
-
-        }
+        })
 
         dispatch("app/SET_STATE", {
-            fields
+            fields,
+            numOfIterations: 1
         })
 
     }
