@@ -8,11 +8,11 @@
             <input type="text" class="form-control" disabled v-model="randomNumber" />
             <div class="arrow-container d-flex align-items-center ml-2">
                 <arrow class="arrow" 
-                       :class="{'arrow-up' : randomNumber > 0, 'arrow-down' : randomNumber < 0}" />
+                       :class="[ randomNumber > 0 ? 'arrow-up' : 'arrow-down' ]" />
             </div>
         </div>
         <button class="btn w-100 mt-2"
-                :class="{'btn-primary' : field.changeValue, 'btn-danger' : !field.changeValue}"
+                :class="[ field.changeValue ? 'btn-primary' : 'btn-danger' ]"
                 @click="toggleButton">
             {{ field.changeValue ? 'Enabled' : 'Disabled' }}
         </button>
@@ -51,20 +51,16 @@ export default {
 
     methods: {
         generateRandomValue() {
+
             if (this.field.changeValue) {
                 let randomValue = _.round(_.random(1,2,true), 2)
                 this.randomNumber = _.random(0,1) ? randomValue : -randomValue
-
-                this.$store.dispatch("app/ADD_TO_HISTORY", {
-                    label: this.field.label,
-                    randomNumber: this.randomNumber
-                })
-            } else {
-                this.$store.dispatch("app/ADD_TO_HISTORY", {
-                    label: this.field.label,
-                    randomNumber: _.last(this.field.valueHistory)
-                })
             }
+
+            this.$store.dispatch("app/ADD_TO_HISTORY", {
+                label: this.field.label,
+                randomNumber: this.randomNumber
+            })
         },
 
         toggleButton() {
