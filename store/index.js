@@ -9,8 +9,11 @@ export const actions = {
             let newField = {}
 
             newField.label = String.fromCharCode('A'.charCodeAt() + i)
-            newField.valueHistory = [state.app.initialValue]
-            newField.changeValue = true
+            newField.valueHistory = [{
+                x: state.app.numOfIterations,
+                y: state.app.initialValue
+            }]
+            newField.allowChange = true
 
             fields.push(newField)
         })

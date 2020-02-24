@@ -1,10 +1,13 @@
-$darkBlue: #4095BF;
+$blue: #4095BF;
+$darkBlue: #0062cc;
 $lightBlue: #D9EAF2;
 $lightGrey: #F5FAFA;
+$red: #dc3545;
+$darkRed: #c82333;
 
 .bg {
-    &-dark-blue {
-        background-color: $darkBlue;
+    &-blue {
+        background-color: $blue;
     }
 
     &-light-blue {
@@ -14,11 +17,21 @@ $lightGrey: #F5FAFA;
     &-light-grey {
         background-color: $lightGrey;
     }
+
+    &-dark-blue {
+        background-color: $darkBlue;
+    }
+    &-red {
+        background-color: $red;
+    }
+    &-dark-red {
+        background-color: $darkRed;
+    }
 }
 
 .color {
-    &-dark-blue {
-        color: $darkBlue;
+    &-blue {
+        color: $blue;
     }
 
     &-light-blue {
@@ -27,5 +40,15 @@ $lightGrey: #F5FAFA;
 
     &-light-grey {
         color: $lightGrey;
+    }
+
+    &-darker-blue {
+        color: $darkBlue;
+    }
+    &-red {
+        color: $red;
+    }
+    &-dark-red {
+        color: $darkRed;
     }
 }

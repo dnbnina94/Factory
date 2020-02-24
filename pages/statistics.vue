@@ -2,15 +2,16 @@
   <div class="container">
     <div class="row">
       <line-chart class="col-md-12 mb-4 mb-md-5"
-                  :datasets="allFieldsDataset()"
-                  :labels="numOfIterations">
+                  :datasets="fieldDatasets"
+                  label="All fields:"
+                  :bigChart="true"
+                  :labels="labels">
       </line-chart>
-      <line-chart class="col-md-4" v-for="(field, index) in fields" 
+      <line-chart class="col-md-4" v-for="(fieldDataset, index) in fieldDatasets" 
                   :key="index"
-                  :label="field.label"
-                  :data="field.valueHistory"
-                  :labels="numOfIterations"
-                  borderColor="#4095BF">
+                  :datasets="[fieldDataset]"
+                  :label="fieldDataset.label | formatLabel"
+                  :labels="labels">
       </line-chart>
     </div>
   </div>
@@ -19,6 +20,7 @@
 <script>
 
 import LineChart from '~/components/LineChart';
+import BasePage from '~/mixins/BasePage';
 
 export default {
 
@@ -28,20 +30,18 @@ export default {
   mounted() {
   },
 
-  methods: {
-    allFieldsDataset() {
-      return _.map(this.fields, (f,i) => {
-        return {
-            label: f.label,
-            data: f.valueHistory,
-            backgroundColor: this.chartColors[i],
-            borderColor: this.chartColors[i],
-            fill: false,
-            labels: this.numOfIterations
-        }
-      })
+  filters: {
+    formatLabel(label) {
+      return 'Field ' + label + ":"
     }
   },
+
+  methods: {
+  },
+
+  mixins: [
+    BasePage
+  ],
 
   computed: {
     fields() {
@@ -49,7 +49,24 @@ export default {
     },
 
     numOfIterations() {
-      return [...Array(this.$store.getters["app/getState"]("numOfIterations")).keys()]
+      return this.$store.getters["app/getState"]("numOfIterations")
+    },
+
+    fieldDatasets() {
+      return _.map(this.fields, (f, i) => {
+        return {
+          label: f.label,
+          data: f.valueHistory,
+          backgroundColor: this.chartColors[i % this.chartColors.length],
+          borderColor: this.chartColors[i % this.chartColors.length],
+          fill: false,
+          lineTension: 0
+        }
+      })
+    },
+
+    labels() {
+      return [...Array(this.numOfIterations).keys()]
     },
 
     chartColors() {

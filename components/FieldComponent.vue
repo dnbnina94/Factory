@@ -12,9 +12,9 @@
             </div>
         </div>
         <button class="btn w-100 mt-2"
-                :class="[ field.changeValue ? 'btn-primary' : 'btn-danger' ]"
+                :class="[ field.allowChange ? 'btn-primary' : 'btn-danger' ]"
                 @click="toggleButton">
-            {{ field.changeValue ? 'Enabled' : 'Disabled' }}
+            {{ field.allowChange ? 'Enabled' : 'Disabled' }}
         </button>
     </div>
 </template>
@@ -31,14 +31,15 @@ export default {
     }),
 
     props: [
-        'field'
+        'field',
+        'currentIteration'
     ],
 
     watch: {
     },    
 
     created() {
-        this.randomNumber = _.last(this.field.valueHistory)
+        this.randomNumber = _.last(this.field.valueHistory).y
     },
 
     mounted() {
@@ -52,15 +53,18 @@ export default {
     methods: {
         generateRandomValue() {
 
-            if (this.field.changeValue) {
+            if (this.field.allowChange) {
                 let randomValue = _.round(_.random(1,2,true), 2)
                 this.randomNumber = _.random(0,1) ? randomValue : -randomValue
-            }
 
-            this.$store.dispatch("app/ADD_TO_HISTORY", {
-                label: this.field.label,
-                randomNumber: this.randomNumber
-            })
+                this.$store.dispatch("app/ADD_TO_HISTORY", {
+                    label: this.field.label,
+                    randomNumber: {
+                        x: this.currentIteration,
+                        y: this.randomNumber
+                    }   
+                })
+            }
         },
 
         toggleButton() {

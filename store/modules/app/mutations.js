@@ -5,7 +5,7 @@ const mutations = {
 
     TOGGLE_BUTTON: (state, { label, getters }) => {
         let field = getters.getFieldByLabel(label)
-        field && (field.changeValue = !field.changeValue)
+        field && (field.allowChange = !field.allowChange)
     },
 
     ADD_TO_HISTORY: (state, { label, randomNumber, getters }) => {

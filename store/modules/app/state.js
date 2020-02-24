@@ -14,7 +14,18 @@ const state = () => ({
         "#F9F940",
         "#2B9725",
         "#00552B"
-    ]
+    ],
+    windowState: '',
+    smallChartSizes: {
+        mobile: 1.5,
+        tablet: 1.1,
+        desktop: 1.5
+    },
+    bigChartSizes: {
+        mobile: 1.2,
+        tablet: 2,
+        desktop: 2
+    }
 })
 
 export default state;

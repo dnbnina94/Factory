@@ -6,6 +6,7 @@
           <field-component v-for="(field, index) in fields"
                        :key="index"
                        :field="field"
+                       :currentIteration="currentIteration"
                        class="col-md-4"
                        :class="{'mt-md-2' : index > 2}">
           </field-component>
@@ -48,6 +49,10 @@ export default {
     fields() {
       return this.$store.getters["app/getState"]("fields")
     },
+
+    currentIteration() {
+      return this.$store.getters["app/getState"]("numOfIterations")
+    }
   },
 
   components: {

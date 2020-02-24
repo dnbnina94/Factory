@@ -1,5 +1,5 @@
 <template>
-    <div class="navigation bg-dark-blue"
+    <div class="navigation bg-blue"
          :class="{'navigation-hidden' : !showNavbar}">
         <div class="container h-100 d-flex align-items-center justify-content-end">
             <div class="navigation-wrapper">
@@ -70,6 +70,10 @@ export default {
                 text-decoration: none;
             }
         }
+    }
+
+    .nuxt-link-exact-active {
+        font-weight: bold;
     }
 
 }

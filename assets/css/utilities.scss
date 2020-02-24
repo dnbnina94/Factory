@@ -4,8 +4,32 @@
 
 .btn {
     &-primary {
-        border-color: $darkBlue;
-        background-color: $darkBlue;
+
+        &, &:focus {
+            border-color: $blue;
+            background-color: $blue;
+        }
+
+        &:hover {
+            border-color: $darkBlue;
+            background-color: $darkBlue;
+        }
+    }
+
+    &-danger {
+        &, &:focus {
+            border-color: $red;
+            background-color: $red;
+        }
+
+        &:hover {
+            border-color: $darkRed;
+            background-color: $darkRed;
+        }
+    }
+
+    &:focus {
+        box-shadow: none;
     }
 }
 
