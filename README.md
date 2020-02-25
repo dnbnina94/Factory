@@ -1,6 +1,6 @@
 # Factory
 
-> My spectacular Nuxt.js project
+> Vue.js task
 
 ## Build Setup
 
