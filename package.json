@@ -1,7 +1,7 @@
 {
-  "name": "Factory",
+  "name": "factory",
   "version": "1.0.0",
-  "description": "My spectacular Nuxt.js project",
+  "description": "Vue.js task",
   "author": "Nina",
   "private": true,
   "scripts": {
